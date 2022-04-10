@@ -310,7 +310,7 @@ section .title::after{
 }
 .skills .skills-content .column{
     width: calc(50% - 30px);
-    overflow: hidden;
+    
 }
 .skills .skills-content .left .text{
     font-size: 20px;
