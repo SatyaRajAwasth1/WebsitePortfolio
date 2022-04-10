@@ -310,6 +310,7 @@ section .title::after{
 }
 .skills .skills-content .column{
     width: calc(50% - 30px);
+    overflow: hidden;
 }
 .skills .skills-content .left .text{
     font-size: 20px;
@@ -335,57 +336,7 @@ section .title::after{
     color: rgb(220, 20, 220);
     background: none;
 }
-.skills .skills-content .right .bars{
-    margin-bottom: 15px;
-}
-.skills .skills-content .right .info{
-    display: flex;
-    margin-bottom: 5px;
-    align-items: center;
-    justify-content: space-between;
-}
-.skills .skills-content .right span{
-    font-weight: 500;
-    font-size: 18px;
-}
-.skills .skills-content .right .line{
-    height: 5px;
-    width: 100%;
-    background: lightgrey;
-    position: relative;
-}
-.skills .skills-content .right .line::before{
-    content: "";
-    position: absolute;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: rgb(220, 20, 20);
-}
-.skills-content .right .html::before{
-    width: 80%;
-}
-.skills-content .right .css::before{
-    width: 60%;
-}
-.skills-content .right .js::before{
-    width: 60%;
-}
-.skills-content .right .php::before{
-    width: 50%;
-}
-.skills-content .right .mysql::before{
-    width: 60%;
-}
-.skills-content .right .C::before{
-    width: 60%;
-}
-.skills-content .right .Cplus::before{
-    width: 60%;
-}
-.skills-content .right .java::before{
-    width: 50%;
-}
+
 
 /* teams section styling */
 .teams .title::after{
@@ -705,6 +656,7 @@ footer span a:hover{
 	transition: all 0.2s ease-in-out;
 	display: flex;
 	justify-content: center;
+   
 }
 
 .social-menu i:before {
