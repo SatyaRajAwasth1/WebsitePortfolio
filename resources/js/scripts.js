@@ -1,8 +1,14 @@
-  document.addEventListener('DOMContentLoaded', function () {
-    var navbarToggle = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
-    var navbarMenu = document.getElementById('navbar-sticky');
+document.getElementById(
+  "currentYear"
+).innerText = ` - ${new Date().getFullYear()}`;
 
-    navbarToggle.addEventListener('click', function () {
-      navbarMenu.classList.toggle('hidden');
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  var navbarToggle = document.querySelector(
+    '[data-collapse-toggle="navbar-sticky"]'
+  );
+  var navbarMenu = document.getElementById("navbar-sticky");
+
+  navbarToggle.addEventListener("click", function () {
+    navbarMenu.classList.toggle("hidden");
   });
+});
