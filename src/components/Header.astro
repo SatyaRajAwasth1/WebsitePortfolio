@@ -1,0 +1,55 @@
+---
+import "../styles/global.css";
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="p-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex justify-between items-center">
+      <!-- Left: Name -->
+      <div class="text-xl font-bold text-gray-800">
+        <a href="/">/SatyaRajAwasth1</a>
+      </div>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <li><a href="/" class={`hover:text-black transition ${currentPath === '/' ? "border-b-2" : "border-transparent"}`}>Home</a></li>
+        <li><a href="/blogs" class={`hover:text-black transition ${currentPath.startsWith("/blogs") ? "border-b" : "border-transparent"}`}>Blogs</a></li>
+        <li><a href="/news" class={`hover:text-black transition ${currentPath === "/news" ? "border-b" : "border-transparent"}`}>News</a></li>
+        <li><a href="/cv" class={`hover:text-black transition ${currentPath === "/cv" ? "border-b" : "border-transparent"}`}>CV</a></li>
+      </ul>
+
+      <!-- Hamburger Icon -->
+      <button id="menu-toggle" class="md:hidden focus:outline-none p-2 rounded-md hover:bg-gray-100 transition">
+        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor"
+             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <ul id="mobile-menu" class="hidden mt-4 flex-col space-y-2 md:hidden text-gray-700 font-medium">
+      <li><a href="/" class="hover:text-black transition">Home</a></li>
+      <li><a href="/blogs" class="hover:text-black transition">Blogs</a></li>
+      <li><a href="/news" class="hover:text-black transition">News</a></li>
+      <li><a href="/cv" class="hover:text-black transition">CV</a></li>
+    </ul>
+
+    <!-- Divider -->
+    <hr class="mt-4 border-gray-300" />
+  </div>
+</nav>
+
+<!-- Hamburger Menu Toggling for Mobile Nav -->
+<script is:inline>
+  const toggleButton = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  toggleButton?.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  });
+</script>

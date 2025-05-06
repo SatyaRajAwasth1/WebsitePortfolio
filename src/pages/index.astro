@@ -1,0 +1,166 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const blogs = [
+  {
+    date: "Apr 15, 2025",
+    title: "Understanding Distributed Systems",
+    url: "/blog/understanding-distributed-systems",
+  },
+  {
+    date: "Mar 29, 2025",
+    title: "Event-Driven Architecture in Microservices",
+    url: "/blog/event-driven-architecture",
+  },
+  {
+    date: "Mar 12, 2025",
+    title: "CAP Theorem Simplified",
+    url: "/blog/cap-theorem",
+  },
+  {
+    date: "Feb 22, 2025",
+    title: "Golang vs Rust for Systems Programming",
+    url: "/blog/golang-vs-rust",
+  },
+  {
+    date: "Jan 30, 2025",
+    title: "Kafka Fundamentals",
+    url: "/blog/kafka-fundamentals",
+  },
+];
+---
+
+<BaseLayout title="Satya Raj Awasthi">
+  <!-- Hero Section -->
+  <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-12 py-16">
+    <!-- Text Column -->
+    <section class="md:col-span-2">
+      <h1 class="text-5xl font-bold text-gray-900 leading-tight tracking-tight">
+        Hello, I’m Satya
+      </h1>
+      <p class="mt-6 text-lg text-gray-700 leading-relaxed max-w-2xl">
+        I'm a <span class="font-semibold text-indigo-600">Software Engineer</span> by profession and to be by academia — passionate about Programming Systems,
+        Distributed Systems, System Architecture, Open Source, and Tech Communities.
+      </p>
+      <p class="mt-4 text-md text-gray-600 max-w-2xl">
+        Currently working at <strong class="text-green-600">eSewa</strong> as a Software
+        Engineer. If I'm not active on social media, I'm likely with my favorite
+        communities like
+        <a
+          class="text-green-700 hover:underline"
+          href="https://nosk.org.np"
+          target="_blank"
+        >
+          NOSK</a
+        >,
+        <a
+          class="text-blue-900 hover:underline ml-1"
+          href="https://tekcommunity.ncit.edu.np"
+          target="_blank">Nepal Tek Community</a
+        >, supporting events as a
+        <a
+          class="text-red-700 hover:underline ml-1"
+          href="https://githubcampus.expert/SatyaRajAwasth1/"
+          target="_blank">GitHub Campus Expert</a
+        >, or busy writing some code.
+      </p>
+    </section>
+
+    <!-- Image Column -->
+    <section class="flex flex-col items-center space-y-4">
+      <img
+        src="https://avatars.githubusercontent.com/u/77236280?v=4"
+        alt="Satya Raj Awasthi's Picture"
+        class="rounded-2xl border border-gray-300 w-64 h-64 object-cover shadow-xl transition-transform hover:scale-105 duration-300"
+      />
+    </section>
+  </div>
+
+  <!-- Blog & Activities Section -->
+  <section class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- Blogs List -->
+    <div>
+      <h2 class="text-2xl font-semibold text-gray-800">Recent Blogs</h2>
+      <p class="mt-4 text-md text-gray-600 leading-relaxed">
+        Learning and forgetting is a natural process. That's why I love to write
+        what I have read or learned. Here are some of my recent blogs for you.
+      </p>
+
+      <ul
+        class="mt-6 space-y-2 pl-5 list-disc marker:text-indigo-500 text-gray-800"
+      >
+        {
+          blogs.map((blog) => (
+            <li class="transition hover:translate-x-1">
+              <span class="text-sm text-gray-500 mr-2">{blog.date}</span>
+              <a
+                href={blog.url}
+                class="text-base font-medium text-indigo-700 hover:text-indigo-900 hover:underline"
+              >
+                {blog.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <!-- See All Blogs Link -->
+      <div class="mt-6 text-right">
+        <a href="/blog" class="text-indigo-700 hover:text-indigo-900 font-semibold flex items-center">
+          See All Blogs
+          <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Recent Activities Sidebar -->
+    <aside
+      class="bg-gray-50 border border-gray-200 rounded-xl p-5 shadow-sm h-fit"
+    >
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">
+        Recent Activities
+      </h3>
+      <div class="border-b border-gray-300 mb-4"></div> <!-- Horizontal line -->
+      <ul
+        class="space-y-3 list-disc pl-5 marker:text-green-600 text-gray-700 text-sm leading-relaxed"
+      >
+        <li>
+          Mentored & Presented on <span class="bg-gray-200 italic"
+            >Continue building your Hackathon Project in public</span
+          > at Hack36 8.0 , MNNIT India as <a
+            href="https://githubcampus.expert/"
+            class="text-red-600 hover:underline"
+            target="_blank">GitHub Campus Expert</a
+          >
+        </li>
+        <li>Project Defense - <span class="bg-gray-200 italic">A Log-Based Fault Localization and Anomaly Detection System</span>, BE in Software Engineering @NCIT, Pokhara University
+        </li>
+        <li>
+          Knowledge Sharing Session - <span class="bg-gray-200 italic">OAuth 2.0 and JSON Web Encryption (JWE)</span>; Engineering Department - eSewa
+        </li>
+        <li>
+          Led and facilitated celebration of <a
+            href="https://sfd.nosk.org.np/"
+            class="text-green-700 hover:underline"
+            >NOSK Software Freedom Day 2024</a>
+        </li>
+        <li>
+          Presented on <span class="bg-gray-200 italic"
+            >Open Source - Student Professional Perspective</span
+          > @Gnome Asia Summit 2024
+        </li>
+      </ul>
+      <!-- See All Activities Link -->
+      <div class="mt-6 text-right">
+        <a href="/activities" class="text-green-700 hover:text-green-900 font-semibold flex items-center">
+          See All News
+          <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </aside>
+  </section>
+</BaseLayout>
