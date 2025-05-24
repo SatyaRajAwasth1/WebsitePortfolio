@@ -1,0 +1,22 @@
+---
+const { items = [] } = Astro.props;
+/**
+ * items: Array<{ id: string; text: string; level: number }>
+ */
+---
+
+<nav
+  aria-label="Table of contents"
+  class="sticky top-20 max-h-[80vh] overflow-auto bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 rounded-md shadow-sm text-sm"
+>
+  <h2 class="font-semibold mb-3 text-gray-900 dark:text-gray-100">Contents</h2>
+  <ul class="space-y-1">
+    {items.map(({ id, text, level }) => (
+      <li class={`ml-${(level - 1) * 4}`}>
+        <a href={`#${id}`} class="text-indigo-600 hover:underline">
+          {text}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

@@ -1,0 +1,12 @@
+---
+const { items = [] } = Astro.props;
+---
+
+<section class="mt-12 border-t pt-4 text-sm text-gray-600 dark:text-gray-400">
+  <h2 class="font-semibold mb-2">References</h2>
+  <ol class="list-decimal list-inside space-y-1">
+    {items.map((ref) => (
+      <li><a href={ref.href} class="text-indigo-600 hover:underline">{ref.label}</a></li>
+    ))}
+  </ol>
+</section>

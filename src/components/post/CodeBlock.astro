@@ -1,0 +1,16 @@
+---
+const { children, language = "text" } = Astro.props;
+---
+
+<pre class="relative bg-gray-900 text-gray-100 rounded-md p-4 overflow-auto font-mono text-sm">
+  <code class={`language-${language}`}>{children}</code>
+  <button
+    class="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-xs px-2 py-1 rounded"
+    onClick={() => {
+      navigator.clipboard.writeText(children);
+      alert("Copied!");
+    }}
+  >
+    Copy
+  </button>
+</pre>

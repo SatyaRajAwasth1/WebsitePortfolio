@@ -1,0 +1,66 @@
+---
+import { components } from '../components/post/post-mdx-components';
+import SeriesNav from '../components/post/SeriesNav.astro';
+
+const { post, series = [], toc = [] } = Astro.props;
+---
+
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+  <!-- Hero Section: Title & Meta -->
+  <section class="mb-12">
+    <div class="text-center">
+      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight text-gray-900">
+        {post.data.title}
+      </h1>
+      <p class="text-sm mt-2 text-gray-500 dark:text-gray-400">
+        {new Date(post.data.date).toLocaleDateString('en-US', { dateStyle: 'long' })}
+      </p>
+    </div>
+
+    {post.data.coverImage && (
+      <div class="mt-6 overflow-hidden rounded-3xl shadow-lg">
+        <img
+          src={post.data.coverImage}
+          alt={post.data.title}
+          class="w-full h-auto object-cover max-h-[500px]"
+        />
+      </div>
+    )}
+  </section>
+
+  <!-- Series Info (Top) -->
+  {series.length > 0 && (
+    <aside class="bg-indigo-50 dark:bg-indigo-900/20 border-l-4 border-indigo-400 dark:border-indigo-500 p-4 my-8 rounded-lg">
+      <h3 class="font-semibold text-indigo-700 dark:text-indigo-300">Series: {post.data.series.title}</h3>
+      <ul class="ml-4 mt-2 list-decimal text-sm text-indigo-800 dark:text-indigo-200 space-y-1">
+        {series.map((part: { slug: any; data: { series: { part: unknown; }; title: unknown; }; }) => (
+          <li>
+            <a
+              href={`/blogs/${part.slug}`}
+              class={`hover:underline ${part.slug === post.slug ? 'font-bold' : ''}`}
+            >
+              Part {part.data.series.part}: {part.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
+
+  <!-- Main Content -->
+  <div class="prose prose-blog dark:prose-invert max-w-none">
+    <post.Content components={components} />
+  </div>
+
+  <!-- Series Navigation (Bottom) -->
+  {post.data.series && (
+    <div class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8">
+      <SeriesNav
+        prev={series.find((p) => p.data.series.part === post.data.series.part - 1)}
+        next={series.find((p) => p.data.series.part === post.data.series.part + 1)}
+      />
+    </div>
+  )}
+
+</article>
