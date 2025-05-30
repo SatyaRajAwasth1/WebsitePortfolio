@@ -1,0 +1,42 @@
+---
+title: "MCP Overview"
+description: "Lets learn about MCP together"
+date: "2025-05-30"
+tags: ["mcp", "ai", "eapd", "llm"]
+coverImage: "/images/react-speed.jpg"
+showTOC: false
+---
+
+# Model Context Protocol (MCP) Overview
+
+The **Model Context Protocol (MCP)** is an open standard developed by Anthropic in November 2024 to standardize how AI models, particularly Large Language Models (LLMs), interact with external tools and data sources. Often compared to a "USB-C for AI," MCP simplifies integrations by providing a universal interface for seamless, secure, and scalable communication.[](https://www.anthropic.com/news/model-context-protocol)[](https://docs.anthropic.com/en/docs/agents-and-tools/mcp)
+
+## Key Components
+- **MCP Host**: The user-facing AI application (e.g., Claude Desktop, Cursor IDE) that interacts with users and coordinates data access.[](https://modelcontextprotocol.io/introduction)
+- **MCP Client**: Manages 1:1 connections between the host and servers, ensuring secure communication.[](https://techcommunity.microsoft.com/blog/azure-ai-services-blog/model-context-protocol-mcp-integrating-azure-openai-for-enhanced-tool-integratio/4393788)
+- **MCP Server**: Lightweight adapters exposing specific capabilities (tools, resources, prompts) from local or remote systems (e.g., GitHub, Slack, PostgreSQL).[](https://www.digitalocean.com/community/tutorials/model-context-protocol)
+- **Protocol**: Uses JSON-RPC 2.0 over STDIO (local) or HTTP+SSE (remote) for structured message exchange.[](https://modelcontextprotocol.io/docs/concepts/architecture)[](https://en.wikipedia.org/wiki/Model_Context_Protocol)
+
+## Core Features
+- **Tools**: Enable actions like executing code or sending messages.[](https://diamantai.substack.com/p/model-context-protocol-mcp-explained)
+- **Resources**: Provide read-only data access, like querying databases.[](https://www.philschmid.de/mcp-introduction)
+- **Prompts**: User-controlled templates for guiding LLM interactions.[](https://medium.com/%40nimritakoul01/the-model-context-protocol-mcp-a-complete-tutorial-a3abe8a7f4ef)
+- **Sampling**: Allows servers to request LLM completions, enhancing two-way communication.[](https://www.digitalocean.com/community/tutorials/model-context-protocol)
+
+## Benefits
+- **Standardization**: Reduces integration complexity from M×N to M+N, similar to the Language Server Protocol (LSP).[](https://www.digitalocean.com/community/tutorials/model-context-protocol)
+- **Flexibility**: Supports switching between AI models and tools without reconfiguration.[](https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/)
+- **Security**: Implements OAuth 2.1, PKCE, and granular permissions for secure access.[](https://auth0.com/blog/an-introduction-to-mcp-and-authorization/)
+- **Scalability**: Supports diverse transports (STDIO, HTTP+SSE) and a growing ecosystem of pre-built servers.[](https://www.datacamp.com/tutorial/mcp-model-context-protocol)
+
+## Use Cases
+- **Software Development**: IDEs like Zed and Cursor use MCP for real-time code context and automation.[](https://www.anthropic.com/news/model-context-protocol)
+- **Business Automation**: Integrates with tools like Slack, Notion, and GitHub for workflow enhancement.[](https://www.datacamp.com/tutorial/mcp-model-context-protocol)
+- **Data Access**: Enables AI to query databases or fetch web data dynamically.[](https://diamantai.substack.com/p/model-context-protocol-mcp-explained)
+
+## Current State
+- **Adoption**: Supported by OpenAI, Google DeepMind, and tools like Replit and Sourcegraph.[](https://en.wikipedia.org/wiki/Model_Context_Protocol)
+- **Ecosystem**: Over 1,000 community-built servers and official integrations (e.g., Google Drive, Stripe).[](https://www.digitalocean.com/community/tutorials/model-context-protocol)
+- **Challenges**: Lacks standardized authentication, requiring custom solutions, and has a learning curve for setup.[](https://composio.dev/blog/what-is-model-context-protocol-mcp-explained/)[](https://huggingface.co/blog/Kseniase/mcp)
+
+MCP is rapidly becoming a cornerstone for context-aware AI agents, transforming them from isolated chatbots to interoperable systems deeply integrated with real-world tools. For more details, visit [modelcontextprotocol.io](https://modelcontextprotocol.io).[](https://modelcontextprotocol.io/introduction)
