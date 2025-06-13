@@ -22,4 +22,6 @@ export const BLOG_CATEGORIES = [
 ] as const;
 
 
-export type BlogCategory = typeof BLOG_CATEGORIES[number]["name"];
+export const BLOG_CATEGORY_NAMES = BLOG_CATEGORIES.map((c) => c.name);
+
+export type BlogCategory = (typeof BLOG_CATEGORY_NAMES)[number];
