@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { BLOG_CATEGORIES } from "./constants/categories";
 
 const blog = defineCollection({
   schema: z.object({
@@ -6,6 +7,7 @@ const blog = defineCollection({
     description: z.string(),
     date: z.string(),
     tags: z.array(z.string()),
+    category: z.enum(BLOG_CATEGORIES),
     coverImage: z.string().optional(),
     showTOC: z.boolean().optional(),
     series: z
