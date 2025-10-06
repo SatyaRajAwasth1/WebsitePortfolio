@@ -1,1 +1,24 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Prose tweaks for better headings and code readability */
+:root {
+  --header-offset: 6rem;
+}
+
+.prose :where(h1,h2,h3,h4)[id] {
+  scroll-margin-top: var(--header-offset);
+}
+
+.prose pre code {
+  background: transparent;
+}
+
+.prose code:not(pre code) {
+  @apply bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-gray-800 dark:text-gray-100;
+}
+
+/* Match body text tone with other pages (not pure black/white) */
+.prose p, .prose li, .prose td, .prose th {
+  @apply text-gray-700 dark:text-gray-700;
+}

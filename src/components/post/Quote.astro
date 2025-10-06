@@ -1,8 +1,8 @@
 ---
-const { author, children } = Astro.props;
+const { author } = Astro.props;
 ---
 
 <blockquote class="border-l-4 border-indigo-500 pl-4 italic text-gray-700 dark:text-gray-300 my-6">
-  {children}
+  <slot />
   {author && <footer class="mt-2 text-sm font-semibold">— {author}</footer>}
 </blockquote>

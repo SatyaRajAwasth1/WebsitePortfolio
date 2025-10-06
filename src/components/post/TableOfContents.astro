@@ -1,5 +1,14 @@
 ---
-const { items = [] } = Astro.props;
+type TocItem = { id: string; text: string; level: number };
+const { items = [] } = Astro.props as { items: TocItem[] };
+const getIndentClass = (level: number) => {
+  if (level <= 1) return '';
+  if (level === 2) return 'ml-4';
+  if (level === 3) return 'ml-8';
+  if (level === 4) return 'ml-12';
+  if (level === 5) return 'ml-16';
+  return 'ml-20';
+};
 /**
  * items: Array<{ id: string; text: string; level: number }>
  */
@@ -7,13 +16,13 @@ const { items = [] } = Astro.props;
 
 <nav
   aria-label="Table of contents"
-  class="sticky top-20 max-h-[80vh] overflow-auto bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 rounded-md shadow-sm text-sm"
+  class="fixed top-24 right-6 w-[260px] text-sm"
 >
-  <h2 class="font-semibold mb-3 text-gray-900 dark:text-gray-100">Contents</h2>
-  <ul class="space-y-1">
-    {items.map(({ id, text, level }) => (
-      <li class={`ml-${(level - 1) * 4}`}>
-        <a href={`#${id}`} class="text-indigo-600 hover:underline">
+  <h2 class="font-semibold mb-3 text-gray-900 dark:text-gray-100 tracking-wide">On this page</h2>
+  <ul class="space-y-1 text-gray-800 dark:text-gray-800">
+    {items.map(({ id, text, level }: TocItem) => (
+      <li class={getIndentClass(level)}>
+        <a href={`#${id}`} class="block px-2 py-1 rounded-md transition-colors hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100/60 dark:hover:bg-gray-800/50">
           {text}
         </a>
       </li>

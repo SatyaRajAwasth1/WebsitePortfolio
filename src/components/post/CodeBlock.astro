@@ -2,15 +2,25 @@
 const { children, language = "text" } = Astro.props;
 ---
 
-<pre class="relative bg-gray-900 text-gray-100 rounded-md p-4 overflow-auto font-mono text-sm">
-  <code class={`language-${language}`}>{children}</code>
-  <button
-    class="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-xs px-2 py-1 rounded"
-    onClick={() => {
-      navigator.clipboard.writeText(children);
-      alert("Copied!");
-    }}
-  >
-    Copy
-  </button>
+<pre class="relative bg-gray-900 text-gray-100 rounded-xl p-4 overflow-auto font-mono text-sm">
+  <code class={`language-${language}`}><slot /></code>
+  <button class="copy-btn absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-xs px-2 py-1 rounded">Copy</button>
 </pre>
+
+<script>
+  const pre = document.currentScript?.previousElementSibling as HTMLElement | null;
+  if (pre) {
+    const button = pre.querySelector('button.copy-btn') as HTMLButtonElement | null;
+    const code = pre.querySelector('code');
+    if (button && code) {
+      button.addEventListener('click', async () => {
+        const text = code.textContent || '';
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = 'Copied!';
+          setTimeout(() => { button.textContent = 'Copy'; }, 1200);
+        } catch {}
+      });
+    }
+  }
+</script>
