@@ -1,88 +1,163 @@
 ---
-import { components } from '../components/post/post-mdx-components';
-import SeriesNav from '../components/post/SeriesNav.astro';
-import TableOfContents from '../components/post/TableOfContents.astro';
+import { components } from "../components/post/post-mdx-components";
+import SeriesNav from "../components/post/SeriesNav.astro";
+import TableOfContents from "../components/post/TableOfContents.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 
-type BlogEntry = { slug: string; data: { title: string; series?: { part: number } } };
-const { post, series = [], toc = [] } = Astro.props as {
-  post: { slug: string; data: { title: string; date: string; coverImage?: string; showTOC?: boolean; series?: { title: string; part: number } }; Content: any };
+type BlogEntry = {
+  slug: string;
+  data: { title: string; category: string; series?: { part: number } };
+};
+const {
+  post,
+  series = [],
+  toc = [],
+} = Astro.props as {
+  post: {
+    slug: string;
+    data: {
+      title: string;
+      date: string;
+      category: string;
+      coverImage?: string;
+      showTOC?: boolean;
+      series?: { title: string; part: number };
+    };
+    Content: any;
+  };
   series: BlogEntry[];
   toc: Array<{ id: string; text: string; level: number }>;
 };
-const showTOC = Boolean(post?.data?.showTOC) && Array.isArray(toc) && toc.length > 0;
+const showTOC =
+  Boolean(post?.data?.showTOC) && Array.isArray(toc) && toc.length > 0;
 ---
 
-<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+  <Breadcrumbs
+    items={[
+      { label: "Blogs", href: "/blogs" },
+      { label: post.data.category, href: `/blogs#${post.data.category}` },
+    ]}
+  />
 
   <!-- Hero Section: Title & Meta -->
-  <section class="mb-12">
-    <div class="text-center">
-      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight text-gray-900">
-        {post.data.title}
-      </h1>
-      <p class="text-sm mt-2 text-gray-500 dark:text-gray-400">
-        {new Date(post.data.date).toLocaleDateString('en-US', { dateStyle: 'long' })}
-      </p>
+  <header class="mb-12 md:mb-16">
+    <h1
+      class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-gray-900 tracking-tight mb-6"
+    >
+      {post.data.title}
+    </h1>
+    <div
+      class="flex items-center gap-4 text-sm font-medium text-gray-500 border-b border-gray-100 pb-8"
+    >
+      <time datetime={post.data.date}>
+        {
+          new Date(post.data.date).toLocaleDateString("en-US", {
+            dateStyle: "long",
+          })
+        }
+      </time>
+      <span class="text-gray-300">/</span>
+      <span class="text-indigo-600 font-bold uppercase tracking-wider text-xs">
+        {post.data.category}
+      </span>
     </div>
-  </section>
+  </header>
 
   <!-- Series Info (Top) -->
-  {series.length > 0 && (
-    <aside class="bg-white/70 dark:bg-gray-900/50 backdrop-blur-md border border-gray-200 dark:border-gray-700 p-4 my-8 rounded-2xl">
-      <h3 class="font-semibold mb-2 text-gray-900 dark:text-gray-100">Series: {post.data.series?.title}</h3>
-      <ul class="ml-1 mt-1 text-sm text-gray-800 dark:text-gray-200 space-y-1">
-        {series.map((part: BlogEntry) => {
-          const isCurrent = part.slug === post.slug;
-          return (
-            <li class={`rounded-md`}>
-              <a
-                href={`/blogs/${part.slug}`}
-                aria-current={isCurrent ? 'page' : undefined}
-                class={`block px-3 py-1.5 rounded-md transition-colors hover:bg-gray-100/70 dark:hover:bg-gray-800/60 ${isCurrent ? 'font-semibold text-gray-900 dark:text-gray-100 bg-gray-100/80 dark:bg-gray-800/60' : ''}`}
-              >
-                Part {part.data.series?.part}: {part.data.title}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </aside>
-  )}
+  {
+    series.length > 0 && (
+      <aside class="bg-indigo-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-indigo-100 dark:border-gray-800 p-6 my-10 rounded-2xl">
+        <h3 class="font-bold mb-4 text-indigo-900 dark:text-indigo-100 flex items-center gap-2">
+          <svg
+            class="w-5 h-5 font-bold"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+            />
+          </svg>
+          Series: {post.data.series?.title}
+        </h3>
+        <ul class="space-y-2">
+          {series.map((part: BlogEntry) => {
+            const isCurrent = part.slug === post.slug;
+            return (
+              <li>
+                <a
+                  href={`/blogs/${part.slug}`}
+                  aria-current={isCurrent ? "page" : undefined}
+                  class={`block px-4 py-2 rounded-xl transition-all duration-200 ${
+                    isCurrent
+                      ? "bg-white shadow-sm border border-indigo-200 text-indigo-900 font-bold"
+                      : "text-gray-600 hover:text-indigo-600 hover:bg-white/50"
+                  }`}
+                >
+                  <span class="text-xs font-bold text-indigo-400 mr-2 uppercase tracking-tighter">
+                    Part {part.data.series?.part}
+                  </span>
+                  {part.data.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </aside>
+    )
+  }
 
   <!-- Mobile TOC (top) -->
-  {showTOC && (
-    <div class="md:hidden mb-8">
-      <TableOfContents items={toc} />
-    </div>
-  )}
+  {
+    showTOC && (
+      <div class="lg:hidden mb-12">
+        <TableOfContents items={toc} />
+      </div>
+    )
+  }
 
   <!-- Main Content with optional desktop TOC -->
-  <div class={`grid gap-10 ${showTOC ? 'md:grid-cols-[minmax(0,1fr)_300px]' : ''}`}>
-    <div class="prose lg:prose-lg max-w-none">
+  <div class={`grid gap-12 ${showTOC ? "lg:grid-cols-[1fr_280px]" : ""}`}>
+    <div
+      class="prose prose-indigo prose-lg max-w-none prose-headings:font-extrabold prose-headings:tracking-tight prose-a:text-indigo-600 prose-img:rounded-3xl prose-img:shadow-lg"
+    >
       <post.Content components={components} />
     </div>
 
-    {showTOC && (
-      <aside class="hidden md:block">
-        <TableOfContents items={toc} />
-      </aside>
-    )}
+    {
+      showTOC && (
+        <aside class="hidden lg:block sticky top-32 h-fit">
+          <TableOfContents items={toc} />
+        </aside>
+      )
+    }
   </div>
 
   <!-- Series Navigation (Bottom) -->
-  {post.data.series && (
-    <div class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8">
-      {(() => {
-        const currentPart = post.data.series?.part;
-        if (typeof currentPart !== 'number') return null;
-        return (
-          <SeriesNav
-            prev={series.find((p: BlogEntry) => (p.data.series?.part ?? -Infinity) === currentPart - 1)}
-            next={series.find((p: BlogEntry) => (p.data.series?.part ?? -Infinity) === currentPart + 1)}
-          />
-        );
-      })()}
-    </div>
-  )}
-
+  {
+    post.data.series && (
+      <div class="mt-20 pt-10 border-t border-gray-100">
+        {(() => {
+          const currentPart = post.data.series?.part;
+          if (typeof currentPart !== "number") return null;
+          return (
+            <SeriesNav
+              prev={series.find(
+                (p: BlogEntry) =>
+                  (p.data.series?.part ?? -Infinity) === currentPart - 1,
+              )}
+              next={series.find(
+                (p: BlogEntry) =>
+                  (p.data.series?.part ?? -Infinity) === currentPart + 1,
+              )}
+            />
+          );
+        })()}
+      </div>
+    )
+  }
 </article>

@@ -2,12 +2,12 @@
 type TocItem = { id: string; text: string; level: number };
 const { items = [] } = Astro.props as { items: TocItem[] };
 const getIndentClass = (level: number) => {
-  if (level <= 1) return '';
-  if (level === 2) return 'ml-4';
-  if (level === 3) return 'ml-8';
-  if (level === 4) return 'ml-12';
-  if (level === 5) return 'ml-16';
-  return 'ml-20';
+  if (level <= 1) return "";
+  if (level === 2) return "ml-4";
+  if (level === 3) return "ml-8";
+  if (level === 4) return "ml-12";
+  if (level === 5) return "ml-16";
+  return "ml-20";
 };
 /**
  * items: Array<{ id: string; text: string; level: number }>
@@ -16,16 +16,38 @@ const getIndentClass = (level: number) => {
 
 <nav
   aria-label="Table of contents"
-  class="fixed top-24 right-6 w-[260px] text-sm"
+  class="text-sm border-l-2 border-gray-100 py-2"
 >
-  <h2 class="font-semibold mb-3 text-gray-900 dark:text-gray-100 tracking-wide">On this page</h2>
-  <ul class="space-y-1 text-gray-800 dark:text-gray-800">
-    {items.map(({ id, text, level }: TocItem) => (
-      <li class={getIndentClass(level)}>
-        <a href={`#${id}`} class="block px-2 py-1 rounded-md transition-colors hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100/60 dark:hover:bg-gray-800/50">
-          {text}
-        </a>
-      </li>
-    ))}
+  <h2
+    class="font-bold mb-4 text-gray-900 dark:text-indigo-100 px-4 uppercase tracking-widest text-xs"
+  >
+    On this page
+  </h2>
+  <ul class="space-y-1">
+    {
+      items.map(({ id, text, level }: TocItem) => (
+        <li>
+          <a
+            href={`#${id}`}
+            class={`block py-1.5 px-4 transition-all duration-200 border-l-2 -ml-[2px] ${getIndentClass(
+              level,
+            )} border-transparent text-gray-500 hover:text-indigo-600 hover:border-indigo-400`}
+          >
+            {text}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </nav>
+
+<style>
+  /* Optional: Active link highlighting logic could be added here via JS if needed */
+  a:hover {
+    background: linear-gradient(
+      90deg,
+      rgba(79, 70, 229, 0.05) 0%,
+      rgba(79, 70, 229, 0) 100%
+    );
+  }
+</style>
