@@ -169,3 +169,28 @@ const showTOC =
     )
   }
 </article>
+<script>
+  function handleScrollTo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const scrollToId = urlParams.get("scrollTo");
+
+    if (scrollToId) {
+      const element = document.getElementById(scrollToId);
+      if (element) {
+        // Wait a bit for the page to fully render (especially comments)
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+
+          // Clean up the URL without refreshing
+          const newUrl = window.location.pathname;
+          window.history.replaceState({}, document.title, newUrl);
+        }, 500);
+      }
+    }
+  }
+
+  // Run on initial load
+  handleScrollTo();
+  // Run on view transitions
+  document.addEventListener("astro:page-load", handleScrollTo);
+</script>

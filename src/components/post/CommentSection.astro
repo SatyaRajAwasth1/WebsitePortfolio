@@ -31,10 +31,11 @@ const { postSlug } = Astro.props;
         class="hidden mb-10 p-6 bg-gray-50/80 border border-gray-100 rounded-3xl text-center"
     >
         <h3 class="text-lg font-bold mb-2 text-gray-900">
-            Join the conversation
+            Sign in to participate
         </h3>
         <p class="text-gray-600 mb-4 text-sm max-w-xs mx-auto">
-            Please sign in to share your thoughts about this article.
+            Please sign in to react to this article or share your thoughts in
+            the comments.
         </p>
         <button
             id="login-button"
@@ -176,6 +177,8 @@ const { postSlug } = Astro.props;
         if (!section || !list) return;
 
         const postSlug = section.getAttribute("data-post-slug");
+        if (!postSlug) return;
+
         let user: any = null;
         let page = 0;
         const pageSize = 10;
@@ -205,7 +208,7 @@ const { postSlug } = Astro.props;
             const redirectUrl =
                 window.location.origin +
                 window.location.pathname +
-                "#interactions";
+                "?scrollTo=interactions";
             await api.signInWithGoogle(redirectUrl);
         });
 
