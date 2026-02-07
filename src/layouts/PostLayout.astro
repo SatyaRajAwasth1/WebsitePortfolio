@@ -3,6 +3,8 @@ import { components } from "../components/post/post-mdx-components";
 import SeriesNav from "../components/post/SeriesNav.astro";
 import TableOfContents from "../components/post/TableOfContents.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import PostActions from "../components/post/PostActions.astro";
+import CommentSection from "../components/post/CommentSection.astro";
 
 type BlogEntry = {
   slug: string;
@@ -137,7 +139,13 @@ const showTOC =
     }
   </div>
 
+  <div id="interactions" class="scrollTo-interactions">
+    <PostActions postSlug={post.slug} postTitle={post.data.title} />
+    <CommentSection postSlug={post.slug} />
+  </div>
+
   <!-- Series Navigation (Bottom) -->
+
   {
     post.data.series && (
       <div class="mt-20 pt-10 border-t border-gray-100">
